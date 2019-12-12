@@ -1,4 +1,4 @@
-# Spring Boot "Microservice" Example Project
+# Spring Boot Microservice Example
 
 Java / Maven / Spring Boot micro-service.
 
