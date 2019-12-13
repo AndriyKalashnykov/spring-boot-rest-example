@@ -1,16 +1,16 @@
-# Spring Boot Microservice example
+# Spring Boot REST microservice
 
-Java / Maven / Spring Boot micro-service.
+Java / Maven / Spring Boot microservice
 
-Full integration with the latest **Spring** Framework: inversion of control, dependency injection, etc.
+* Full integration with the latest **Spring** Framework 1.x: inversion of control, dependency injection, etc.
 * Packaging as a single jar with embedded container (tomcat 8)
 * Demonstrates how to set up healthcheck, metrics, info, environment, etc. endpoints automatically on a configured port. Inject your own health / metrics info with a few lines of code.
 * RESTful service using annotation: supports both XML and JSON request / response
 * Exception mapping from application exceptions to the right HTTP response with exception details in the body
 * *Spring Data* Integration with JPA/Hibernate
-* Automatic CRUD functionality against the data source using Spring *Repository* pattern
+* CRUD functionality with H2 in-memory data source using Spring *Repository* pattern
 * MockMVC test framework
-* APIs are "self-documented" by Swagger2 using annotations
+* Self-documented APIs: Swagger2 using annotations
 
 ## Pre-requisites
 
@@ -19,7 +19,9 @@ Full integration with the latest **Spring** Framework: inversion of control, dep
 - JDK
 - maven 3.x
 - curl
-      - http
+- http
+- minikube
+- docker
 
 ## Run
 
@@ -50,7 +52,7 @@ or
 ```
   mvn spring-boot:run -Drun.arguments="spring.profiles.active=default"
 ```
-* Check the stdout or boot_example.log file to make sure no exceptions are thrown
+
 
 ### System health, configurations, etc.
 
@@ -98,7 +100,7 @@ minikube delete --all
 minikube start -p minikube --memory=8192 --cpus=6 --vm-driver=hyperkit
 eval $(minikube docker-env)
 minikube start --extra-config=apiserver.anonymous-auth=false --insecure-registry=localhost:5000
-  
+
 mvn clean package -Pk8s fabric8:build
 mvn clean package -Pk8s fabric8:deploy
 mvn clean package fabric8:deploy -Dfabric8.generator.from=fabric8/java-alpine-openjdk8-jdk
