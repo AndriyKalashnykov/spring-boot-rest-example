@@ -1,13 +1,11 @@
 package com.test.example.api.rest;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-
 import com.test.example.domain.Hotel;
 import com.test.example.exception.DataFormatException;
 import com.test.example.service.HotelService;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -35,7 +33,7 @@ public class HotelController extends AbstractRestHandler {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Create a hotel resource.", notes = "Returns the URL of the new resource in the Location header.")
     public void createHotel(@RequestBody Hotel hotel,
-                                 HttpServletRequest request, HttpServletResponse response) {
+                            HttpServletRequest request, HttpServletResponse response) {
         Hotel createdHotel = this.hotelService.createHotel(hotel);
         response.setHeader("Location", request.getRequestURL().append("/").append(createdHotel.getId()).toString());
     }
@@ -48,10 +46,10 @@ public class HotelController extends AbstractRestHandler {
     public
     @ResponseBody
     Page<Hotel> getAllHotel(@ApiParam(value = "The page number (zero-based)", required = true)
-                                      @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
-                                      @ApiParam(value = "Tha page size", required = true)
-                                      @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
-                                      HttpServletRequest request, HttpServletResponse response) {
+                            @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
+                            @ApiParam(value = "Tha page size", required = true)
+                            @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
+                            HttpServletRequest request, HttpServletResponse response) {
         return this.hotelService.getAllHotels(page, size);
     }
 
@@ -63,8 +61,8 @@ public class HotelController extends AbstractRestHandler {
     public
     @ResponseBody
     Hotel getHotel(@ApiParam(value = "The ID of the hotel.", required = true)
-                             @PathVariable("id") Long id,
-                             HttpServletRequest request, HttpServletResponse response) throws Exception {
+                   @PathVariable("id") Long id,
+                   HttpServletRequest request, HttpServletResponse response) throws Exception {
         Hotel hotel = this.hotelService.getHotel(id);
         checkResourceFound(hotel);
         //todo: http://goo.gl/6iNAkz
@@ -78,8 +76,8 @@ public class HotelController extends AbstractRestHandler {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Update a hotel resource.", notes = "You have to provide a valid hotel ID in the URL and in the payload. The ID attribute can not be updated.")
     public void updateHotel(@ApiParam(value = "The ID of the existing hotel resource.", required = true)
-                                 @PathVariable("id") Long id, @RequestBody Hotel hotel,
-                                 HttpServletRequest request, HttpServletResponse response) {
+                            @PathVariable("id") Long id, @RequestBody Hotel hotel,
+                            HttpServletRequest request, HttpServletResponse response) {
         checkResourceFound(this.hotelService.getHotel(id));
         if (id != hotel.getId()) throw new DataFormatException("ID doesn't match!");
         this.hotelService.updateHotel(hotel);
@@ -92,8 +90,8 @@ public class HotelController extends AbstractRestHandler {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Delete a hotel resource.", notes = "You have to provide a valid hotel ID in the URL. Once deleted the resource can not be recovered.")
     public void deleteHotel(@ApiParam(value = "The ID of the existing hotel resource.", required = true)
-                                 @PathVariable("id") Long id, HttpServletRequest request,
-                                 HttpServletResponse response) {
+                            @PathVariable("id") Long id, HttpServletRequest request,
+                            HttpServletResponse response) {
         checkResourceFound(this.hotelService.getHotel(id));
         this.hotelService.deleteHotel(id);
     }

@@ -1,11 +1,9 @@
 package com.test.example.api.rest.docs;
 
 import com.google.common.base.Predicates;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -25,12 +23,12 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                        .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.any())
                 .paths(Predicates.not(PathSelectors.regex("/error")))
                 .build()
                 .apiInfo(apiInfo());
     }
-    
+
 
     private ApiInfo apiInfo() {
         String description = "REST example";
@@ -38,10 +36,9 @@ public class SwaggerConfig {
                 .title("REST example")
                 .description(description)
                 .termsOfServiceUrl("github")
-                .license("Siamak")
+                .license("Apache 2.0")
                 .licenseUrl("")
                 .version("1.0")
- //               .contact(new Contact("siamak"))
                 .build();
     }
 

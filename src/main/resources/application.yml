@@ -1,7 +1,3 @@
-### This is the main way to configure the application (other than annotations).
-### This file is in Yaml format but you can also configure spring boot using the traditional
-### Java properties file format.
-
 spring.jmx:
    enabled: false
 
@@ -10,7 +6,7 @@ spring.datasource:
     url: jdbc:h2:mem:bootexample;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE
 
 server:
-  port: 8090
+  port: 8080
 
 #todo: make sure to always enable security in production
 security:
@@ -19,7 +15,7 @@ security:
 
 #management endpoints on a separate port
 management:
-  port: 8091
+  port: 8081
   security:
     enabled: false # management port is internal only. no need to secure it.
 
@@ -37,19 +33,19 @@ info:
 
 hotel.service:
   name: 'default profile:'
----
-spring:
-  profiles: test
-  h2:
-    console:
-      enabled: true
-
-spring.jpa:
-    hibernate.ddl-auto: create-drop
-
-hotel.service:
-  name: 'test profile:'
-
-logging:
-  file: boot_example.log
-  org.hibernate: INFO
+#---
+#spring:
+#  profiles: test
+#  h2:
+#    console:
+#      enabled: true
+#
+#spring.jpa:
+#    hibernate.ddl-auto: create-drop
+#
+#hotel.service:
+#  name: 'test profile:'
+#
+#logging:
+#  file: boot_example.log
+#  org.hibernate: INFO

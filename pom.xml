@@ -6,7 +6,7 @@
     <groupId>com.test</groupId>
     <artifactId>spring-boot-rest-example</artifactId>
     <version>0.0.1</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <description>REST APIs example: Spring Boot, H2, Tomcat, Swagger, JsonPath, Hamcrest and MockMVC
     </description>
 
@@ -17,6 +17,8 @@
     </parent>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <start-class>com.test.example.Application</start-class>
     </properties>
 
@@ -158,4 +160,43 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>k8s</id>
+
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>fabric8-maven-plugin</artifactId>
+                        <version>4.3.1</version>
+                        <configuration>
+                            <generator>
+                                <config>
+                                    <spring-boot>
+                                        <fromMode>docker</fromMode>
+                                        <from>fabric8/java-alpine-openjdk8-jdk</from>
+                                    </spring-boot>
+                                </config>
+                            </generator>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>resource</goal>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+    </profiles>
+
 </project>

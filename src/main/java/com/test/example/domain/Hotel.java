@@ -1,11 +1,10 @@
 package com.test.example.domain;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
-/*
- * a simple domain entity doubling as a DTO
- */
 @Entity
 @Table(name = "hotel")
 @XmlRootElement

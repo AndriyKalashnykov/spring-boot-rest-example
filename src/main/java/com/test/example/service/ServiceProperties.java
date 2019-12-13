@@ -13,14 +13,14 @@ import javax.validation.constraints.NotNull;
 public class ServiceProperties {
 
     @NotNull // you can also create configurationPropertiesValidator
-	private String name = "Empty";
+    private String name = "Empty";
 
-	public String getName() {
-		return this.name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
 }

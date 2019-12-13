@@ -25,7 +25,7 @@ public abstract class AbstractRestHandler implements ApplicationEventPublisherAw
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
     protected ApplicationEventPublisher eventPublisher;
 
-    protected static final String  DEFAULT_PAGE_SIZE = "100";
+    protected static final String DEFAULT_PAGE_SIZE = "100";
     protected static final String DEFAULT_PAGE_NUM = "0";
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

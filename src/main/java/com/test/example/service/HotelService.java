@@ -1,7 +1,7 @@
 package com.test.example.service;
 
-import com.test.example.domain.Hotel;
 import com.test.example.dao.jpa.HotelRepository;
+import com.test.example.domain.Hotel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
