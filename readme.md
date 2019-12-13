@@ -46,7 +46,7 @@ mvn clean package
 ```
 * Run the service
 ```
-  java -jar -Dspring.profiles.active=test target/spring-boot-rest-example-0.0.1.jar
+  java -jar -Dspring.profiles.active=default target/spring-boot-rest-example-0.0.1.jar
 ```        
 or
 ```
@@ -63,13 +63,17 @@ http://localhost:8081/info
 http://localhost:8081/metrics
 http://localhost:8081/configprops
 
-http://localhost:8090/swagger-ui.html
+http://localhost:8080/swagger-ui.html
 ```
 
 ### Micro-service API
 
 ```
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json 'http://localhost:8080/example/v1/hotels'
+```
+or
+```
+http POST http://localhost:8080/example/v1/hotels < hotel.json
 ```
 or
 ```
@@ -93,7 +97,7 @@ http http://localhost:8080/example/v1/hotels?page=0&size=10
 ### Swagger 2 API docs
 
 ```
-open -a /Applications/Google\ Chrome.app http://localhost:8090/swagger-ui.html
+open -a /Applications/Google\ Chrome.app http://localhost:8080/swagger-ui.html
 ```
 
 minikube delete --all
@@ -110,6 +114,27 @@ minikube service spring-boot-rest-example --url
 
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json 'http://192.168.64.15:30660/example/v1/hotels'
 http http://192.168.64.15:30660/example/v1/hotels?page=0&size=10
+
+
+### Building docker image
+
+  https://stackify.com/guide-docker-java/
+
+  docker run -v ~/.m2:/root/.m2 -v "$PWD":/usr/src -w /usr/src maven:3-jdk-8 mvn clean package
+  The compiled artifacts will be in $PWD/target
+
+  docker build  -f Dockerfile.maven-multi-stage-layer-cached -t spring-boot-rest-example .
+
+  sudo lsof -i :8081
+  docker rm -f spring-boot-rest-example
+
+  # adding 100 to port number to avoid local conflicts (McAfee runs on 8081)
+  docker run --name spring-boot-rest-example -p 8080:8080 -p 8181:8081 spring-boot-rest-example:latest
+
+  curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json 'http://localhost:8080/example/v1/hotels'
+  http http://localhost:8080/example/v1/hotels?page=0&size=10
+  http http://localhost:8080/swagger-ui.html
+  http http://localhost:8181/health
 
 
 ### Attaching to the app from IDE
