@@ -83,7 +83,7 @@ curl -X POST 'http://localhost:8080/example/v1/hotels' --header 'Content-Type: a
 ### Retrieve a paginated list of hotels
 
 ```
-curl --silent 'http://localhost:8080/example/v1/hotels?page=0&size=10' --stderr -  2>&1 | jq .
+curl -X GET --silent 'http://localhost:8080/example/v1/hotels?page=0&size=10' --stderr -  2>&1 | jq .
 ```
 or
 ```
@@ -115,12 +115,31 @@ http http://192.168.64.15:30660/example/v1/hotels?page=0&size=10
 
   https://stackify.com/guide-docker-java/
 
+#### Optional, not recommended : Using local maven cache
+
+  In order to build image quickly by compiling maven project using local maven repo
+
+  Compile project, artifact will be placed in $PWD/target
+  ```
   docker run -v ~/.m2:/root/.m2 -v "$PWD":/usr/src -w /usr/src maven:3-jdk-8 mvn clean package
-  The compiled artifacts will be in $PWD/target
+  ```
+
+  Build image
+  ```
+  docker build  -f Dockerfile.maven-host-cache -t spring-boot-rest-example .
+  ```
+
+  Test image
+  ```
+  # adding 100 to port number to avoid local conflicts (McAfee runs on 8081)
+  docker run --name spring-boot-rest-example -p 8080:8080 -p 8181:8081 spring-boot-rest-example:latest
+  curl -X POST 'http://localhost:8080/example/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json --stderr -
+  curl -X GET --silent 'http://localhost:8080/example/v1/hotels?page=0&size=10' --stderr -  2>&1 | jq .
+
+  ```
 
   docker build  -f Dockerfile.maven-multi-stage-layer-cached -t spring-boot-rest-example .
 
-  sudo lsof -i :8081
   docker rm -f spring-boot-rest-example
 
   # adding 100 to port number to avoid local conflicts (McAfee runs on 8081)
@@ -128,7 +147,6 @@ http http://192.168.64.15:30660/example/v1/hotels?page=0&size=10
 
   curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json 'http://localhost:8080/example/v1/hotels'
   http http://localhost:8080/example/v1/hotels?page=0&size=10
-  http http://localhost:8080/swagger-ui.html
   http http://localhost:8181/health
 
 
