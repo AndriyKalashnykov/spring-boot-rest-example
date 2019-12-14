@@ -69,30 +69,25 @@ http://localhost:8080/swagger-ui.html
 ### Micro-service API
 
 ```
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json 'http://localhost:8080/example/v1/hotels'
+curl -X POST 'http://localhost:8080/example/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json --stderr -
 ```
 or
 ```
-http POST http://localhost:8080/example/v1/hotels < hotel.json
+http POST 'http://localhost:8080/example/v1/hotels' < hotel.json
 ```
 or
 ```
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{
-"name" : "Beds R Us",
-"description" : "Very basic, small rooms but clean",
-"city" : "Santa Ana",
-"rating" : 2
-}' 'http://localhost:8080/example/v1/hotels'
+curl -X POST 'http://localhost:8080/example/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"name":"Beds R Us","description":"Very basic, small rooms but clean","city":"Santa Ana","rating":2}' --stderr -
 ```
 
 ### Retrieve a paginated list of hotels
 
 ```
-curl http://localhost:8080/example/v1/hotels?page=0&size=10
+curl --silent 'http://localhost:8080/example/v1/hotels?page=0&size=10' --stderr -  2>&1 | jq .
 ```
 or
 ```
-http http://localhost:8080/example/v1/hotels?page=0&size=10
+http  'http://localhost:8080/example/v1/hotels?page=0&size=10'
 ```
 ### Swagger 2 API docs
 
