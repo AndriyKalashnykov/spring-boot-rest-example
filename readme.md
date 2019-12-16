@@ -14,6 +14,8 @@ Java / Maven / Spring Boot microservice
 
 ## Pre-requisites
 
+TODO: for each app/tool add link to the installation page
+
 - macos x
 - sdkman
 - JDK
@@ -54,7 +56,7 @@ or
 ```
 
 
-### System health, configurations, etc.
+### Application health, configurations, documentation links
 
 ```
 http://localhost:8081/env
@@ -113,42 +115,45 @@ http http://192.168.64.15:30660/example/v1/hotels?page=0&size=10
 
 ### Building docker image
 
-  https://stackify.com/guide-docker-java/
 
-#### Optional, not recommended : Using local maven cache
+#### Optional, local test only: Using local maven cache
 
-  In order to build image quickly by compiling maven project using local maven repo
+  In order to build image quickly by compiling maven project using host OS  maven repo
 
-  Compile project, artifact will be placed in $PWD/target
+  Build project, artifact will be placed in $PWD/target
+
   ```
+  cd spring-boot-rest-example
   docker run -v ~/.m2:/root/.m2 -v "$PWD":/usr/src -w /usr/src maven:3-jdk-8 mvn clean package
   ```
 
-  Build image
+  #### Build non multi-stage image using existing artifact in $PWD/target
+
   ```
+  cd spring-boot-rest-example
+  docker rm -f spring-boot-rest-example
   docker build  -f Dockerfile.maven-host-cache -t spring-boot-rest-example .
   ```
 
-  Test image
+  #### Build  multi-stage image  
+
+  ```
+  docker rm -f spring-boot-rest-example
+  docker build  -f Dockerfile.maven-multi-stage-layer-cached -t spring-boot-rest-example .
+  ```
+
+
+  #### Test Application
+
   ```
   # adding 100 to port number to avoid local conflicts (McAfee runs on 8081)
   docker run --name spring-boot-rest-example -p 8080:8080 -p 8181:8081 spring-boot-rest-example:latest
+
   curl -X POST 'http://localhost:8080/example/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json --stderr -
+
   curl -X GET --silent 'http://localhost:8080/example/v1/hotels?page=0&size=10' --stderr -  2>&1 | jq .
 
   ```
-
-  docker build  -f Dockerfile.maven-multi-stage-layer-cached -t spring-boot-rest-example .
-
-  docker rm -f spring-boot-rest-example
-
-  # adding 100 to port number to avoid local conflicts (McAfee runs on 8081)
-  docker run --name spring-boot-rest-example -p 8080:8080 -p 8181:8081 spring-boot-rest-example:latest
-
-  curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json 'http://localhost:8080/example/v1/hotels'
-  http http://localhost:8080/example/v1/hotels?page=0&size=10
-  http http://localhost:8181/health
-
 
 ### Attaching to the app from IDE
 
@@ -158,6 +163,7 @@ Run the service with these command line options:
 mvn spring-boot:run -Drun.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
 ```
 or
+
 ```
 java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dspring.profiles.active=test -Ddebug -jar target/spring-boot-rest-example-0.0.1.jar
 ```
