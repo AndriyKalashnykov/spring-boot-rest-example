@@ -68,7 +68,7 @@ http://localhost:8081/configprops
 http://localhost:8080/swagger-ui.html
 ```
 
-### Micro-service API
+### Microservice API
 
 ```
 curl -X POST 'http://localhost:8080/example/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json --stderr -
@@ -143,7 +143,7 @@ http http://192.168.64.15:30660/example/v1/hotels?page=0&size=10
   ```
 
 
-  #### Test Application
+  #### Test application
 
   ```
   # adding 100 to port number to avoid local conflicts (McAfee runs on 8081)
@@ -155,7 +155,7 @@ http http://192.168.64.15:30660/example/v1/hotels?page=0&size=10
 
   ```
 
-### Attaching to the app from IDE
+### Attaching to the application from IDE
 
 Run the service with these command line options:
 
