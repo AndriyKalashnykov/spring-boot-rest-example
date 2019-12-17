@@ -25,7 +25,7 @@ TODO: for each app/tool add link to the installation page
 - minikube
 - docker
 
-## Run
+## Build and Run
 
 This application is packaged as a jar which has Tomcat 8 embedded.
 

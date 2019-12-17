@@ -2,7 +2,7 @@
 ARG MVN_VERSION=3.6.3
 ARG JDK_VERSION=8
 
-FROM maven:${MVN_VERSION}-jdk-8 as MAVEN_TOOL_CHAIN_CACHE
+FROM maven:${MVN_VERSION}-jdk-${JDK_VERSION} as MAVEN_TOOL_CHAIN_CACHE
 WORKDIR /build
 COPY pom.xml .
 RUN mvn dependency:go-offline
@@ -15,7 +15,7 @@ RUN mvn clean package
 # https://hub.docker.com/_/openjdk?tab=tags&page=1&name=8-jre-slim
 # https://hub.docker.com/_/openjdk?tab=tags&page=1&name=8-jre-alpine
 
-# FROM openjdk:8-jre-slim
+# FROM openjdk:{JDK_VERSION}-jre-slim
 FROM openjdk:${JDK_VERSION}-jre-alpine
 
 COPY --from=MAVEN_TOOL_CHAIN_CACHE /tmp/target/spring-boot-rest-example-0.0.1.jar /spring-boot-rest-example-0.0.1.jar
@@ -28,6 +28,6 @@ EXPOSE 9779
 # debug options
 # ENV _JAVA_OPTIONS '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'
 
-ENV _JAVA_OPTIONS "-Xms256m -Xmx512m -Djava.awt.headless=true"
+ENV _JAVA_OPTIONS "-Xms256m -Xmx512m -Djava.awt.headless=true -Dspring.output.ansi.enabled=ALWAYS"
 
 CMD ["java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=default", "/spring-boot-rest-example-0.0.1.jar"]

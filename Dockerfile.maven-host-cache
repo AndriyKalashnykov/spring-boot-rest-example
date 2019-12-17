@@ -9,5 +9,5 @@ EXPOSE 8081
 EXPOSE 8778
 EXPOSE 9779
 
-ENV _JAVA_OPTIONS "-Xms256m -Xmx512m -Djava.awt.headless=true"
+ENV _JAVA_OPTIONS "-Xms256m -Xmx512m -Djava.awt.headless=true -Dspring.output.ansi.enabled=ALWAYS "
 CMD ["java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=default", "/spring-boot-rest-example-0.0.1.jar"]
