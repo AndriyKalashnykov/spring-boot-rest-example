@@ -28,6 +28,6 @@ EXPOSE 9779
 # debug options
 # ENV _JAVA_OPTIONS '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'
 
-ENV _JAVA_OPTIONS "-Xms256m -Xmx512m -Djava.awt.headless=true -Dspring.output.ansi.enabled=ALWAYS"
+ENV _JAVA_OPTIONS "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Xms256m -Xmx512m -Djava.awt.headless=true -Dspring.output.ansi.enabled=ALWAYS"
 
 CMD ["java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=default", "/spring-boot-rest-example-0.0.1.jar"]
