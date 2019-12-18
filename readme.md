@@ -162,6 +162,7 @@ IntelliJ : Run -> Edit configuration -> Remote.
 minikube delete --all
 minikube start -p minikube --memory=16384 --cpus=6 --disk-size=30g --vm-driver=virtualbox
 eval $(minikube docker-env)
+eval "$(docker-machine env -u)"
 # minikube start --vm-driver=virtualbox --extra-config=apiserver.anonymous-auth=false --insecure-registry=localhost:5000
 minikube ssh 'docker logs $(docker ps -a -f name=k8s_kube-api --format={{.ID}})'
 
@@ -177,7 +178,6 @@ http $(minikube service spring-boot-rest-example --url | sed -n 1p)/example/v1/h
 http $(minikube service spring-boot-rest-example --url | sed -n 2p)/swagger-ui.html
 http $(minikube service spring-boot-rest-example --url | sed -n 2p)/info
 http $(minikube service spring-boot-rest-example --url | sed -n 2p)/health
-
 
 ##### Monitor k8s resources
 

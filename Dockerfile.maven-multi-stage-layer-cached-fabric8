@@ -1,0 +1,29 @@
+ARG MVN_VERSION=3.6.3
+ARG JDK_VERSION=8
+
+FROM maven:${MVN_VERSION}-jdk-${JDK_VERSION} as MAVEN_TOOL_CHAIN_CACHE
+WORKDIR /build
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+COPY ./pom.xml /tmp/
+COPY ./src /tmp/src/
+WORKDIR /tmp/
+RUN mvn clean package
+
+FROM fabric8/java-alpine-openjdk${JDK_VERSION}-jre
+
+COPY --from=MAVEN_TOOL_CHAIN_CACHE /tmp/target/spring-boot-rest-example-0.0.1.jar /deployments/spring-boot-rest-example-0.0.1.jar
+
+ENV JAVA_APP_JAR="spring-boot-rest-example-0.0.1.jar"
+ENV AB_OFF ""
+
+ENV JAVA_MIN_MEM_RATIO=30
+ENV JAVA_MAX_MEM_RATIO=70
+
+EXPOSE 8080
+EXPOSE 8081
+EXPOSE 8778
+EXPOSE 9779
+
+ENV _JAVA_OPTIONS "-XX:+PrintFlagsFinal -Djava.awt.headless=true -Dspring.output.ansi.enabled=ALWAYS -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=default"
