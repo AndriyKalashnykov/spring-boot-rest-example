@@ -159,27 +159,37 @@ IntelliJ : Run -> Edit configuration -> Remote.
 
 ### Deploy application to k8s
 
+```
 minikube delete --all
 minikube start -p minikube --memory=16384 --cpus=6 --disk-size=30g --vm-driver=virtualbox
 eval $(minikube docker-env)
 eval "$(docker-machine env -u)"
 # minikube start --vm-driver=virtualbox --extra-config=apiserver.anonymous-auth=false --insecure-registry=localhost:5000
-minikube ssh 'docker logs $(docker ps -a -f name=k8s_kube-api --format={{.ID}})'
 
 mvn clean package -DskipTests -Pk8s fabric8:undeploy
 mvn clean package -Pk8s fabric8:deploy
-#mvn clean package fabric8:deploy -Dfabric8.generator.from=fabric8/java-alpine-openjdk8-jdk
+
+minikube ssh 'docker logs $(docker ps -a -f name=k8s_kube-api --format={{.ID}})'
+```
+
+### Deploy application to k8s overriding runtime JDK/JRE
+```
+mvn clean package fabric8:deploy -Dfabric8.generator.from=fabric8/java-alpine-openjdk8-jdk
+```
 
 ### Test deployed application
 
+```
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json $(minikube service spring-boot-rest-example --url | sed -n 1p)/example/v1/hotels
 http $(minikube service spring-boot-rest-example --url | sed -n 1p)/example/v1/hotels?page=0&size=10
 
 http $(minikube service spring-boot-rest-example --url | sed -n 2p)/swagger-ui.html
 http $(minikube service spring-boot-rest-example --url | sed -n 2p)/info
 http $(minikube service spring-boot-rest-example --url | sed -n 2p)/health
+```
 
 ##### Monitor k8s resources
-
+```
 kubectl get nodes --no-headers | awk '{print $1}' | xargs -I {} sh -c 'echo {}; kubectl describe node {} | grep Allocated -A 5 | grep -ve Event -ve Allocated -ve percent -ve -- ; echo'
 kubectl top pod --all-namespaces
+```
