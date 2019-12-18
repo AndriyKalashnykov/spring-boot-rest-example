@@ -196,7 +196,7 @@
                                     <port>9779</port>
                                 </ports>
                                 <jvmFlags>
-                                    <jvmFlag>-Xms512m</jvmFlag>
+                                    <jvmFlag>-Xms370m</jvmFlag>
                                     <jvmFlag>-Xmx512m</jvmFlag>
                                     <jvmFlag>-Xdebug</jvmFlag>
                                 </jvmFlags>

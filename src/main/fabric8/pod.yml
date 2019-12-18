@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ${project.artifactId}
+spec:
+  containers:
+    - name: ${project.artifactId}
+      image: test/${project.artifactId}:0.0.1
+      env:
+        - name: JVM_OPTS
+          value: "-Xmx300M"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: 1
+        limits:
+          memory: "370Mi"
+          cpu: 2
+  restartPolicy: OnFailure

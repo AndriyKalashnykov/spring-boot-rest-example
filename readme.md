@@ -98,19 +98,28 @@ open -a /Applications/Google\ Chrome.app http://localhost:8080/swagger-ui.html
 ```
 
 minikube delete --all
-minikube start -p minikube --memory=8192 --cpus=6 --vm-driver=hyperkit
+minikube start -p minikube --memory=16384 --cpus=6 --disk-size=50g --vm-driver=hyperkit --extra-config=apiserver.anonymous-auth=false --insecure-registry=localhost:5000
+
 eval $(minikube docker-env)
 minikube start --extra-config=apiserver.anonymous-auth=false --insecure-registry=localhost:5000
 
 mvn clean package -Pk8s fabric8:build
+mvn clean package -DskipTests -Pk8s fabric8:undeploy
 mvn clean package -Pk8s fabric8:deploy
 mvn clean package fabric8:deploy -Dfabric8.generator.from=fabric8/java-alpine-openjdk8-jdk
-mvn clean package -Pk8s fabric8:undeploy
+
 
 minikube service spring-boot-rest-example --url
 
+minikube ssh 'docker logs $(docker ps -a -f name=k8s_kube-api --format={{.ID}})'
+
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json 'http://192.168.64.15:30660/example/v1/hotels'
 http http://192.168.64.15:30660/example/v1/hotels?page=0&size=10
+
+http http://192.168.64.15:30792/swagger-ui.html
+
+http http://192.168.64.15:32143/info
+http http://192.168.64.15:32143/health
 
 
 ### Building docker image
