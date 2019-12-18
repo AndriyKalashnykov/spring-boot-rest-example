@@ -7,8 +7,12 @@ spec:
     - name: ${project.artifactId}
       image: test/${project.artifactId}:0.0.1
       env:
+#        JDK 10
+#        - name: JAVA_OPTS
+#          value: "-XX:MinRAMPercentage=60.0 -XX:MaxRAMPercentage=90.0 -XX:+HeapDumpOnOutOfMemoryError"
+#        JDK 8 & 9
         - name: JVM_OPTS
-          value: "-Xmx300M"
+          value: "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1 -Xmx300M"
       resources:
         requests:
           memory: "64Mi"
