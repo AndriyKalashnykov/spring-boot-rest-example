@@ -176,17 +176,10 @@
                         <version>1.6.1</version>
                         <configuration>
                             <from>
-<!--                                <image>openjdk:8-jre-slim</image>-->
                                 <image>fabric8/java-alpine-openjdk8-jdk</image>
                             </from>
                             <to>
                                 <image>docker.io/andriykalashnykov/spring-boot-rest-example:${project.version}</image>
-<!--                                <image>localhost:5000/spring-boot-rest-example:${project.version}</image>-->
-<!--                                <credHelper>osxkeychain</credHelper>-->
-<!--                                <tags>-->
-<!--                                    <tag>tag2</tag>-->
-<!--                                    <tag>latest</tag>-->
-<!--                                </tags>-->
                             </to>
                             <container>
                                 <ports>
