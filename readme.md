@@ -3,7 +3,7 @@
 
 Java / Maven / Spring Boot microservice
 
-* Full integration with the latest **Spring** Framework 1.x: inversion of control, dependency injection, etc.
+* Full integration with the latest **Spring** Framework 2.x: inversion of control, dependency injection, etc.
 * Packaging as a single jar with embedded container (tomcat 8)
 * Demonstrates how to set up healthcheck, metrics, info, environment, etc. endpoints automatically on a configured port. Inject your own health / metrics info with a few lines of code.
 * RESTful service using annotation: supports both XML and JSON request / response

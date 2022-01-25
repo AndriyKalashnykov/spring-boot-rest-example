@@ -1,3 +1,4 @@
+
 package com.test.example.api.rest;
 
 import com.test.example.domain.Hotel;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 /*
  * Demonstrates how to set up RESTful API endpoints using Spring MVC

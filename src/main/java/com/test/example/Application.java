@@ -6,8 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ComponentScan;
+//import org.springframework.boot.web.support.SpringBootServletInitializer;
+//import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -17,8 +18,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @Configuration
-@EnableAutoConfiguration  // Sprint Boot Auto Configuration
-@ComponentScan(basePackages = "com.test.example")
+//@EnableAutoConfiguration  // Sprint Boot Auto Configuration
+//@ComponentScan(basePackages = "com.test.example")
 @EnableJpaRepositories("com.test.example.dao.jpa") // To segregate MongoDB and JPA repositories. Otherwise not needed.
 public class Application extends SpringBootServletInitializer {
 

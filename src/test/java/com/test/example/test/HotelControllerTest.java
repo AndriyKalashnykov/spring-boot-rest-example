@@ -68,6 +68,8 @@ public class HotelControllerTest {
         Hotel r1 = mockHotel("shouldCreateRetrieveDelete");
         byte[] r1Json = toJson(r1);
 
+        String[] valList = new String[]{status().isNotFound().toString(), status().isNoContent().toString()};
+
         //CREATE
         MvcResult result = mvc.perform(post("/example/v1/hotels")
                 .content(r1Json)
@@ -95,6 +97,7 @@ public class HotelControllerTest {
         //RETRIEVE should fail
         mvc.perform(get("/example/v1/hotels/" + id)
                 .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().is(anyOf(equalTo(status().isNotFound()), equalTo(status().isNoContent()))));
                 .andExpect(status().isNotFound());
 
         //todo: you can test the 404 error body too.

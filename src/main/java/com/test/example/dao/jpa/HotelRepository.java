@@ -10,6 +10,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface HotelRepository extends PagingAndSortingRepository<Hotel, Long> {
     Hotel findHotelByCity(String city);
-
+    Hotel findById(long id);
     Page findAll(Pageable pageable);
 }
