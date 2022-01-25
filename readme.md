@@ -1,4 +1,4 @@
-[![test](https://github.com/AndriyKalashnykov/spring-boot-rest-example/actions/workflows/test.yml/badge.svg)](https://github.com/AndriyKalashnykov/spring-boot-rest-example/actions/workflows/test.yml)
+[![test](https://github.com/AndriyKalashnykov/spring-boot-rest-example/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/AndriyKalashnykov/spring-boot-rest-example/actions/workflows/test.yml)
 # Spring Boot REST microservice
 
 Java / Maven / Spring Boot microservice
