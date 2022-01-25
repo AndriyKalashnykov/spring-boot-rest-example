@@ -17,14 +17,15 @@ Java / Maven / Spring Boot microservice
 
 TODO: for each app/tool add link to the installation page
 
-- macos x
-- sdkman
-- JDK
-- maven 3.x
-- curl
-- http
-- minikube
-- docker
+-  MacOS X or better
+- [sdkman](https://sdkman.io/install)
+- [Apache Maven](https://maven.apache.org/install.html)
+- [curl](https://help.ubidots.com/en/articles/2165289-learn-how-to-install-run-curl-on-windows-macosx-linux)
+- [jq](https://github.com/stedolan/jq/wiki/Installation)
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [http](https://httpie.io/cli)
+- [minikube](https://minikube.sigs.k8s.io/docs/start/)
+- [Docker](https://docs.docker.com/engine/install/)
 
 ## Build and Run
 
