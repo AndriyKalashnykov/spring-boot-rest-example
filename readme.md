@@ -30,31 +30,31 @@ TODO: for each app/tool add link to the installation page
 This application is packaged as a jar which has Tomcat 8 embedded.
 
 * Clone this repository
-```
+
+```bash
 git clone git@github.com:AndriyKalashnykov/spring-boot-rest-example.git
 cd spring-boot-rest-example
 ```
 * Select JDK
-```
-sdk use java 8.0.232.hs-adpt
-```
-or
-```
-sdk use java 11.0.5.hs-adpt
+
+```bash
+sdk install java 11.0.11.hs-adpt
+sdk use java 11.0.11.hs-adpt
 ```
 * Build the project and run the tests by running
-```
+
+```bash
 mvn clean package
 ```
 * Run the service
-```
-  java -jar -Dspring.profiles.active=default target/spring-boot-rest-example-0.0.1.jar
-```        
-or
+
 ```
   mvn spring-boot:run -Drun.arguments="spring.profiles.active=default"
 ```
-
+or
+```bash
+  java -jar -Dspring.profiles.active=default target/spring-boot-rest-example-0.0.1.jar
+```
 
 ### Application health, configurations, documentation links
 
