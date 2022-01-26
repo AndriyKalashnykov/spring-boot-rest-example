@@ -24,7 +24,10 @@ public class SwaggerConfig {
                 .groupName("public-api")
                 .select()
 //                .apis(RequestHandlerSelectors.any())
-                .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
+//                .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
+//                .paths(Predicates.not(PathSelectors.regex("/error")))
+                .apis(RequestHandlerSelectors.basePackage("org.springframework.boot").negate())
+                .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo());
     }
