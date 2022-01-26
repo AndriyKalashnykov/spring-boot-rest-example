@@ -21,6 +21,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("public-api")
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
