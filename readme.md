@@ -15,8 +15,6 @@ Java / Maven / Spring Boot microservice
 
 ## Pre-requisites
 
-TODO: for each app/tool add link to the installation page
-
 * [sdkman](https://sdkman.io/install)
 * [Apache Maven](https://maven.apache.org/install.html)
 * [curl](https://help.ubidots.com/en/articles/2165289-learn-how-to-install-run-curl-on-windows-macosx-linux)
