@@ -17,15 +17,14 @@ Java / Maven / Spring Boot microservice
 
 TODO: for each app/tool add link to the installation page
 
--  MacOS X or better
-- [sdkman](https://sdkman.io/install)
-- [Apache Maven](https://maven.apache.org/install.html)
-- [curl](https://help.ubidots.com/en/articles/2165289-learn-how-to-install-run-curl-on-windows-macosx-linux)
-- [jq](https://github.com/stedolan/jq/wiki/Installation)
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- [http](https://httpie.io/cli)
-- [minikube](https://minikube.sigs.k8s.io/docs/start/)
-- [Docker](https://docs.docker.com/engine/install/)
+* [sdkman](https://sdkman.io/install)
+* [Apache Maven](https://maven.apache.org/install.html)
+* [curl](https://help.ubidots.com/en/articles/2165289-learn-how-to-install-run-curl-on-windows-macosx-linux)
+* [jq](https://github.com/stedolan/jq/wiki/Installation)
+* [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* [http](https://httpie.io/cli)
+* [minikube](https://minikube.sigs.k8s.io/docs/start/)
+* [Docker](https://docs.docker.com/engine/install/)
 
 ## Build and Run
 
@@ -51,23 +50,20 @@ mvn clean package
 * Run the service
 
 ```
-  mvn spring-boot:run -Drun.arguments="spring.profiles.active=default"
-```
-or
-```bash
-  java -jar -Dspring.profiles.active=default target/spring-boot-rest-example-0.0.1.jar
+  mvn clean spring-boot:run -Dspring-boot.run.profiles=default
 ```
 
-### Application health, configurations, documentation links
+### Swagger UI documentation links, application health, configurations 
 
 ```
-http://localhost:8081/env
-http://localhost:8081/health
-http://localhost:8081/info
-http://localhost:8081/metrics
-http://localhost:8081/configprops
-
 http://localhost:8080/swagger-ui.html
+
+http://localhost:8080/env
+http://localhost:8080/health
+http://localhost:8080/info
+http://localhost:8080/metrics
+http://localhost:8080/configprops
+
 ```
 
 ### Microservice API
@@ -96,7 +92,7 @@ http  'http://localhost:8080/example/v1/hotels?page=0&size=10'
 ### Swagger 2 API docs
 
 ```
-open -a /Applications/Google\ Chrome.app http://localhost:8080/swagger-ui.html
+xdg-open  http://localhost:8080/swagger-ui.html
 ```
 
 
@@ -129,12 +125,10 @@ open -a /Applications/Google\ Chrome.app http://localhost:8080/swagger-ui.html
   docker build  -f Dockerfile.maven-multi-stage-layer-cached -t spring-boot-rest-example .
   ```
 
-
   #### Test application
 
   ```
-  # adding 100 to port number to avoid local conflicts (McAfee runs on 8081)
-  docker run --name spring-boot-rest-example -p 8080:8080 -p 8181:8081 spring-boot-rest-example:latest
+  docker run --name spring-boot-rest-example -p 8080:8080 spring-boot-rest-example:latest
 
   curl -X POST 'http://localhost:8080/example/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json --stderr -
 
@@ -168,15 +162,9 @@ eval $(minikube docker-env)
 eval "$(docker-machine env -u)"
 # minikube start --vm-driver=virtualbox --extra-config=apiserver.anonymous-auth=false --insecure-registry=localhost:5000
 
-mvn clean package -DskipTests -Pk8s fabric8:undeploy
-mvn clean package -Pk8s fabric8:deploy
+# deploy to k8s
 
 minikube ssh 'docker logs $(docker ps -a -f name=k8s_kube-api --format={{.ID}})'
-```
-
-### Deploy application to k8s overriding runtime JDK/JRE
-```
-mvn clean package fabric8:deploy -Dfabric8.generator.from=fabric8/java-alpine-openjdk8-jdk
 ```
 
 ### Test deployed application

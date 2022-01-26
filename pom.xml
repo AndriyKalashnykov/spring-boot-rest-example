@@ -41,6 +41,11 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 
         <dependency>
             <artifactId>logback-classic</artifactId>
@@ -48,18 +53,11 @@
             <version>1.2.5</version>
         </dependency>
 
-        <!-- Spring security -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
         <!-- spring-data-jpa, spring-orm and Hibernate -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>com.h2database</groupId>
@@ -205,90 +203,5 @@
             </plugin>
         </plugins>
     </build>
-    <profiles>
-
-        <profile>
-            <id>jib</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.google.cloud.tools</groupId>
-                        <artifactId>jib-maven-plugin</artifactId>
-                        <version>1.6.1</version>
-                        <configuration>
-                            <from>
-                                <image>fabric8/java-alpine-openjdk8-jdk</image>
-                            </from>
-                            <to>
-                                <image>docker.io/andriykalashnykov/spring-boot-rest-example:${project.version}</image>
-                            </to>
-                            <container>
-                                <ports>
-                                    <port>8080</port>
-                                    <port>8081</port>
-                                    <port>8778</port>
-                                    <port>9779</port>
-                                </ports>
-                                <jvmFlags>
-                                    <jvmFlag>-Xms370m</jvmFlag>
-                                    <jvmFlag>-Xmx512m</jvmFlag>
-                                    <jvmFlag>-Xdebug</jvmFlag>
-                                </jvmFlags>
-                                <mainClass>com.test.example.Application</mainClass>
-                                <environment>
-                                    <SPRING_OUTPUT_ANSI_ENABLED>ALWAYS</SPRING_OUTPUT_ANSI_ENABLED>
-                                </environment>
-                                <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
-                                <format>OCI</format>
-                            </container>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-
-        <profile>
-            <id>k8s</id>
-
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>io.fabric8</groupId>
-                        <artifactId>fabric8-maven-plugin</artifactId>
-                        <version>4.3.1</version>
-                        <configuration>
-                            <generator>
-                                <config>
-                                    <spring-boot>
-                                        <fromMode>docker</fromMode>
-                                        <from>fabric8/java-alpine-openjdk8-jdk</from>
-                                    </spring-boot>
-                                </config>
-                            </generator>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>resource</goal>
-                                    <goal>build</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                </plugins>
-            </build>
-
-        </profile>
-    </profiles>
 
 </project>
