@@ -5,7 +5,7 @@ package com.test.example.test;
  */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.test.example.Application;
+import com.test.example.SpringBootRestExampleApplication;
 import com.test.example.api.rest.HotelController;
 import com.test.example.domain.Hotel;
 
@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = SpringBootRestExampleApplication.class)
 @ActiveProfiles("test")
 public class HotelControllerTest {
 
