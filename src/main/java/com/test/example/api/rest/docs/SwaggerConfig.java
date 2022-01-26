@@ -23,7 +23,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("public-api")
                 .select()
-                .apis(RequestHandlerSelectors.any())
+//                .apis(RequestHandlerSelectors.any())
                 .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
                 .build()
                 .apiInfo(apiInfo());
