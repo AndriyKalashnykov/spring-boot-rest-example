@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: spring-boot-rest-example
   jmx:
     enabled: false
   datasource:
@@ -31,6 +33,12 @@ project:
   version: 0.1
   description: boot-example default description
 info:
+  application:
+    name: ${spring.application.name}
+    description: Spring Boot application
+    version: '@project.version@'
+    spring-cloud-version: '@spring-cloud.version@'
+    spring-boot-version: '@project.parent.version@'
   build:
     artifact: ${project.artifactId}
     name: ${project.name}
