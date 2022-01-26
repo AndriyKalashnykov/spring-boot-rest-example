@@ -25,11 +25,9 @@ management:
       base-path: "/actuator"
       exposure:
         include: "*"
-
   security:
     enabled: false
 
-#default project info followed by actual injected pom-specified values.
 project:
   name: spring-boot-rest-example
   version: 0.1
@@ -39,7 +37,6 @@ info:
     name: ${spring.application.name}
     description: Spring Boot application
     version: '@project.version@'
-    spring-cloud-version: '@spring-cloud.version@'
     spring-boot-version: '@project.parent.version@'
   build:
     artifact: ${project.artifactId}
@@ -49,19 +46,3 @@ info:
 
 hotel.service:
   name: 'default profile:'
-#---
-#spring:
-#  profiles: test
-#  h2:
-#    console:
-#      enabled: true
-#
-#spring.jpa:
-#    hibernate.ddl-auto: create-drop
-#
-#hotel.service:
-#  name: 'test profile:'
-#
-#logging:
-#  file: boot_example.log
-#  org.hibernate: INFO

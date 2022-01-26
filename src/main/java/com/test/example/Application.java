@@ -9,10 +9,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-/*
- * This is the main Spring Boot application class. It configures Spring Boot, JPA, Swagger
- */
-
 @Configuration
 @EnableJpaRepositories("com.test.example.dao.jpa")
 @SpringBootApplication
@@ -30,6 +26,4 @@ public class Application extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(applicationClass);
     }
-
-
 }

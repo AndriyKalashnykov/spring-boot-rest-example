@@ -18,7 +18,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan("com.test.example.api.rest")
 public class SwaggerConfig {
 
-
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -28,7 +27,6 @@ public class SwaggerConfig {
                 .build()
                 .apiInfo(apiInfo());
     }
-
 
     private ApiInfo apiInfo() {
         String description = "REST example";
@@ -41,5 +39,4 @@ public class SwaggerConfig {
                 .version("1.0")
                 .build();
     }
-
 }

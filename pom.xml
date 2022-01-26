@@ -19,7 +19,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-cloud.version>2021.0.0</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -46,6 +45,12 @@
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -200,6 +205,13 @@
                 <configuration>
                     <addResources>false</addResources>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
