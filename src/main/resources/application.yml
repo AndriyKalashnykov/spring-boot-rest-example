@@ -8,11 +8,13 @@ spring:
 server:
   port: 8080
 
+
 security:
   basic:
     enabled: false
 
 management:
+  context-path: "/actuator"
   endpoints:
     enabled-by-default: true
     web:

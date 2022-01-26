@@ -54,38 +54,38 @@ mvn clean package
 ### Swagger UI documentation links, application health, configurations 
 
 ```
-http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-ui.html#/hotels
 
-http://localhost:8080/env
-http://localhost:8080/health
-http://localhost:8080/info
-http://localhost:8080/metrics
-http://localhost:8080/configprops
+http://localhost:8080/actuator/env
+http://localhost:8080/actuator/health
+http://localhost:8080/actuator/info
+http://localhost:8080/actuator/metrics
+http://localhost:8080/actuator/configprops
 
 ```
 
 ### Microservice API
 
 ```
-curl -X POST 'http://localhost:8080/example/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json --stderr -
+curl -X POST 'http://localhost:8080/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json --stderr -
 ```
 or
 ```
-http POST 'http://localhost:8080/example/v1/hotels' < hotel.json
+http POST 'http://localhost:8080/v1/hotels' < hotel.json
 ```
 or
 ```
-curl -X POST 'http://localhost:8080/example/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"name":"Beds R Us","description":"Very basic, small rooms but clean","city":"Santa Ana","rating":2}' --stderr -
+curl -X POST 'http://localhost:8080/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"name":"Beds R Us","description":"Very basic, small rooms but clean","city":"Santa Ana","rating":2}' --stderr -
 ```
 
 ### Retrieve a paginated list of hotels
 
 ```
-curl -X GET --silent 'http://localhost:8080/example/v1/hotels?page=0&size=10' --stderr -  2>&1 | jq .
+curl -X GET --silent 'http://localhost:8080/v1/hotels?page=0&size=10' --stderr -  2>&1 | jq .
 ```
 or
 ```
-http  'http://localhost:8080/example/v1/hotels?page=0&size=10'
+http  'http://localhost:8080/v1/hotels?page=0&size=10'
 ```
 ### Swagger 2 API docs
 
@@ -128,9 +128,9 @@ xdg-open  http://localhost:8080/swagger-ui.html
   ```
   docker run --name spring-boot-rest-example -p 8080:8080 spring-boot-rest-example:latest
 
-  curl -X POST 'http://localhost:8080/example/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json --stderr -
+  curl -X POST 'http://localhost:8080/v1/hotels' --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json --stderr -
 
-  curl -X GET --silent 'http://localhost:8080/example/v1/hotels?page=0&size=10' --stderr -  2>&1 | jq .
+  curl -X GET --silent 'http://localhost:8080/v1/hotels?page=0&size=10' --stderr -  2>&1 | jq .
 
   ```
 
@@ -168,8 +168,8 @@ minikube ssh 'docker logs $(docker ps -a -f name=k8s_kube-api --format={{.ID}})'
 ### Test deployed application
 
 ```
-curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json $(minikube service spring-boot-rest-example --url | sed -n 1p)/example/v1/hotels
-http $(minikube service spring-boot-rest-example --url | sed -n 1p)/example/v1/hotels?page=0&size=10
+curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --data @hotel.json $(minikube service spring-boot-rest-example --url | sed -n 1p)/v1/hotels
+http $(minikube service spring-boot-rest-example --url | sed -n 1p)/v1/hotels?page=0&size=10
 
 http $(minikube service spring-boot-rest-example --url | sed -n 2p)/swagger-ui.html
 http $(minikube service spring-boot-rest-example --url | sed -n 2p)/info

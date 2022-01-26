@@ -39,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 public class HotelControllerTest {
 
-    private static final String RESOURCE_LOCATION_PATTERN = "http://localhost/example/v1/hotels/[0-9]+";
+    private static final String RESOURCE_LOCATION_PATTERN = "http://localhost/v1/hotels/[0-9]+";
 
     @InjectMocks
     HotelController controller;
@@ -57,7 +57,7 @@ public class HotelControllerTest {
 
     //@Test
     public void shouldHaveEmptyDB() throws Exception {
-        mvc.perform(get("/example/v1/hotels")
+        mvc.perform(get("/v1/hotels")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
@@ -71,7 +71,7 @@ public class HotelControllerTest {
         String[] valList = new String[]{status().isNotFound().toString(), status().isNoContent().toString()};
 
         //CREATE
-        MvcResult result = mvc.perform(post("/example/v1/hotels")
+        MvcResult result = mvc.perform(post("/v1/hotels")
                 .content(r1Json)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -81,7 +81,7 @@ public class HotelControllerTest {
         long id = getResourceIdFromUrl(result.getResponse().getRedirectedUrl());
 
         //RETRIEVE
-        mvc.perform(get("/example/v1/hotels/" + id)
+        mvc.perform(get("/v1/hotels/" + id)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is((int) id)))
@@ -91,11 +91,11 @@ public class HotelControllerTest {
                 .andExpect(jsonPath("$.rating", is(r1.getRating())));
 
         //DELETE
-        mvc.perform(delete("/example/v1/hotels/" + id))
+        mvc.perform(delete("/v1/hotels/" + id))
                 .andExpect(status().isNoContent());
 
         //RETRIEVE should fail
-        mvc.perform(get("/example/v1/hotels/" + id)
+        mvc.perform(get("/v1/hotels/" + id)
                 .accept(MediaType.APPLICATION_JSON))
 //                .andExpect(status().is(anyOf(equalTo(status().isNotFound()), equalTo(status().isNoContent()))));
                 .andExpect(status().isNotFound());
@@ -114,7 +114,7 @@ JSONAssert.assertEquals(
         Hotel r1 = mockHotel("shouldCreateAndUpdate");
         byte[] r1Json = toJson(r1);
         //CREATE
-        MvcResult result = mvc.perform(post("/example/v1/hotels")
+        MvcResult result = mvc.perform(post("/v1/hotels")
                 .content(r1Json)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -128,7 +128,7 @@ JSONAssert.assertEquals(
         byte[] r2Json = toJson(r2);
 
         //UPDATE
-        result = mvc.perform(put("/example/v1/hotels/" + id)
+        result = mvc.perform(put("/v1/hotels/" + id)
                 .content(r2Json)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -136,7 +136,7 @@ JSONAssert.assertEquals(
                 .andReturn();
 
         //RETRIEVE updated
-        mvc.perform(get("/example/v1/hotels/" + id)
+        mvc.perform(get("/v1/hotels/" + id)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is((int) id)))
@@ -146,7 +146,7 @@ JSONAssert.assertEquals(
                 .andExpect(jsonPath("$.rating", is(r2.getRating())));
 
         //DELETE
-        mvc.perform(delete("/example/v1/hotels/" + id))
+        mvc.perform(delete("/v1/hotels/" + id))
                 .andExpect(status().isNoContent());
     }
 

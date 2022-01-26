@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Optional;
 
 /*
  * Demonstrates how to set up RESTful API endpoints using Spring MVC
  */
 
 @RestController
-@RequestMapping(value = "/example/v1/hotels")
+@RequestMapping(value = "/v1/hotels")
 @Api(tags = {"hotels"})
 public class HotelController extends AbstractRestHandler {
 
