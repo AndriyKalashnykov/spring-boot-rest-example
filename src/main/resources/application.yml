@@ -1,3 +1,17 @@
+#server:
+#  port: 8080
+#
+#spring:
+#  application:
+#    name: spring-boot-rest-example
+#
+#management:
+#  context-path: "/actuator"
+#  endpoints:
+#    web:
+#      exposure:
+#        include:  "*"
+
 server:
   port: 8080
 
