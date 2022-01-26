@@ -54,7 +54,7 @@ mvn clean package
 ### Swagger UI documentation links, application health, configurations 
 
 ```
-http://localhost:8080/swagger-ui.html#/hotels
+http://localhost:8080/swagger-ui/#/hotels
 
 http://localhost:8080/actuator/env
 http://localhost:8080/actuator/health
