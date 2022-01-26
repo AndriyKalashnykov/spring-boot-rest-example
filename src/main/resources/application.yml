@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: spring-boot-rest-example
@@ -9,10 +12,6 @@ spring:
   h2:
     console:
       enabled: true
-
-server:
-  port: 8080
-
 
 security:
   basic:
