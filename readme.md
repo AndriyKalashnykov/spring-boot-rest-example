@@ -37,8 +37,8 @@ cd spring-boot-rest-example
 * Select JDK
 
 ```bash
-sdk install java 11.0.11.hs-adpt
-sdk use java 11.0.11.hs-adpt
+sdk install java 17.0.1.12.1-amzn
+sdk use java1 17.0.1.12.1-amzn
 ```
 * Build the project and run the tests by running
 
@@ -90,7 +90,7 @@ http  'http://localhost:8080/v1/hotels?page=0&size=10'
 ### Swagger 2 API docs
 
 ```
-xdg-open  http://localhost:8080/swagger-ui.html
+xdg-open http://localhost:8080/swagger-ui/#/hotels
 ```
 
 
