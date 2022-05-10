@@ -39,8 +39,8 @@ cd spring-boot-rest-example
 * Select JDK
 
 ```bash
-sdk install java 17.0.1.12.1-amzn
-sdk use java 17.0.1.12.1-amzn
+sdk install java 18.0.1-tem
+sdk use java 18.0.1-tem
 ```
 * Build the project and run the tests by running
 
