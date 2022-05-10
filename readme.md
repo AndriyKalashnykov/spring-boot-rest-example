@@ -40,7 +40,7 @@ cd spring-boot-rest-example
 
 ```bash
 sdk install java 17.0.1.12.1-amzn
-sdk use java1 17.0.1.12.1-amzn
+sdk use java 17.0.1.12.1-amzn
 ```
 * Build the project and run the tests by running
 
