@@ -64,7 +64,7 @@
         <dependency>
             <artifactId>logback-classic</artifactId>
             <groupId>ch.qos.logback</groupId>
-            <version>1.2.5</version>
+            <version>1.2.13</version>
         </dependency>
 
         <!-- spring-data-jpa, spring-orm and Hibernate -->
